@@ -17,7 +17,7 @@ Stack: Next.js 14 · Supabase (Postgres + Auth) · Resend (correo) · Twilio (Wh
 | Sección | Función |
 |---|---|
 | Clientes | Alta/baja, etiquetas para segmentar, consentimiento por canal. Puedes también importar CSV desde el Table Editor de Supabase. |
-| Cobros | Crea cobros con enlace de pago, envía recordatorio manual, marca pagado. |
+| Cobros | Crea cobros en pesos (DOP) o dólares (USD) con enlace de pago, envía recordatorio manual, marca pagado. |
 | Promociones | Envía una campaña por correo, WhatsApp o ambos a todos o a una etiqueta. Variables `{{nombre}} {{empresa}} {{negocio}}`. |
 | Historial | Cada mensaje enviado/fallido queda registrado. |
 | Cron `/api/cron/reminders` | Marca vencidos y recuerda 3 días antes, 1 día antes, el día de vencimiento y cada 3 días en mora. |

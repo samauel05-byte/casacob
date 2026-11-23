@@ -41,7 +41,7 @@ export async function deleteClient(f: FormData) {
 export async function createInvoice(f: FormData) {
   await supabaseServer().from("invoices").insert({
     client_id: s(f, "client_id"), concept: s(f, "concept"),
-    amount: Number(f.get("amount")), currency: s(f, "currency") ?? "USD",
+    amount: Number(f.get("amount")), currency: s(f, "currency") === "USD" ? "USD" : "DOP",
     due_date: s(f, "due_date"), payment_link: s(f, "payment_link"),
   });
   revalidatePath("/cobros");

@@ -18,8 +18,23 @@ export function render(tpl: string, vars: Record<string, string | number | null 
   return tpl.replace(/{{\s*(\w+)\s*}}/g, (_, k) => String(vars[k] ?? ""));
 }
 
-export const money = (n: number, currency = "USD") =>
-  new Intl.NumberFormat("es", { style: "currency", currency }).format(n);
+export const CURRENCIES = ["DOP", "USD"] as const;
+
+export const money = (n: number, currency = "DOP") =>
+  new Intl.NumberFormat("es-DO", { style: "currency", currency }).format(n);
+
+/** Suma montos agrupados por moneda: { DOP: 1000, USD: 50 }. */
+export function sumByCurrency(rows: { amount: number | string; currency: string }[] | null) {
+  const out: Record<string, number> = {};
+  for (const r of rows ?? []) out[r.currency] = (out[r.currency] ?? 0) + Number(r.amount);
+  return out;
+}
+
+/** "RD$1,000.00 · US$50.00" (o RD$0.00 si no hay nada). */
+export function moneyTotals(t: Record<string, number>) {
+  const parts = CURRENCIES.filter((c) => t[c]).map((c) => money(t[c], c));
+  return parts.length ? parts.join(" · ") : money(0, "DOP");
+}
 
 async function sendEmail(to: string, subject: string, text: string) {
   const key = process.env.RESEND_API_KEY;
