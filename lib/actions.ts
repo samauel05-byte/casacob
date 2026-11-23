@@ -10,10 +10,10 @@ const s = (f: FormData, k: string) => (String(f.get(k) ?? "").trim() || null);
 
 export async function login(f: FormData) {
   const { error } = await supabaseServer().auth.signInWithPassword({
-    email: String(f.get("email")),
-    password: String(f.get("password")),
+    email: String(f.get("email") ?? "").trim().toLowerCase(),
+    password: String(f.get("password") ?? ""),
   });
-  if (error) redirect("/login?error=1");
+  if (error) redirect(error.code === "invalid_credentials" ? "/login?error=1" : "/login?error=2");
   redirect("/");
 }
 
