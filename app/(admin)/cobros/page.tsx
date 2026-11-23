@@ -27,7 +27,10 @@ export default async function Cobros() {
         </select>
         <input className="input" name="concept" placeholder="Concepto (ej. Página web - cuota 2)" required />
         <input className="input" name="amount" type="number" step="0.01" placeholder="Monto" required />
-        <input className="input" name="currency" defaultValue="USD" />
+        <select className="input" name="currency" defaultValue="DOP">
+          <option value="DOP">Pesos dominicanos (DOP)</option>
+          <option value="USD">Dólares (USD)</option>
+        </select>
         <input className="input" name="due_date" type="date" required />
         <input className="input" name="payment_link" placeholder="Enlace de pago (opcional)" />
         <button className="btn md:col-span-3">Crear cobro</button>
